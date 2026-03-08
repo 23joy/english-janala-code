@@ -119,4 +119,21 @@ const displyLesson=(lessons)=>{
     levelContainer.append(btnDiv);
     }
 }
+
+document.getElementById("btn-search").addEventListener("click",function(){
+    const input=document.getElementById("input-search")
+    const searchValue=input.value
+    
+    fetch("https://openapi.programming-hero.com/api/words/all")
+    .then((res)=>res.json())
+    .then((data)=>{
+        const allwords=data.data;
+        console.log(allwords);
+        const filterwords=allwords.filter((word)=>
+            word.word.toLowerCase().includes(searchValue)
+        );
+        displylevelWord(filterwords)
+    })
+})
+
 loadLessons();
